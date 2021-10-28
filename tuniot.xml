@@ -1,0 +1,743 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_setup" x="27" y="38">
+    <statement name="MySetup">
+      <block type="neo_init">
+        <field name="insta">pixels</field>
+        <field name="NeoPin">5</field>
+        <field name="bitstream">NEO_KHZ800</field>
+        <field name="NeoType">NEO_GRB</field>
+        <value name="NbPx">
+          <block type="math_number">
+            <field name="NUM">12</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_declare">
+            <mutation divisor_input="false"></mutation>
+            <field name="VAR">EmJogo</field>
+            <field name="PROPERTY">int</field>
+            <value name="VALUE">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_declare">
+                <mutation divisor_input="false"></mutation>
+                <field name="VAR">EmConfiguracao</field>
+                <field name="PROPERTY">int</field>
+                <value name="VALUE">
+                  <block type="math_number">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_declare">
+                    <mutation divisor_input="false"></mutation>
+                    <field name="VAR">ModoJogo</field>
+                    <field name="PROPERTY">int</field>
+                    <value name="VALUE">
+                      <block type="variables_get">
+                        <field name="VAR">EmJogo</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_declare">
+                        <mutation divisor_input="false"></mutation>
+                        <field name="VAR">TempDeJogo</field>
+                        <field name="PROPERTY">int</field>
+                        <value name="VALUE">
+                          <block type="math_number">
+                            <field name="NUM">30</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_declare">
+                            <mutation divisor_input="false"></mutation>
+                            <field name="VAR">BotaoMudaJogo</field>
+                            <field name="PROPERTY">int</field>
+                            <value name="VALUE">
+                              <block type="inout_highlow">
+                                <field name="BOOL">HIGH</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_declare">
+                                <mutation divisor_input="false"></mutation>
+                                <field name="VAR">TempoApertado</field>
+                                <field name="PROPERTY">int</field>
+                                <value name="VALUE">
+                                  <block type="math_number">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_declare">
+                                    <mutation divisor_input="false"></mutation>
+                                    <field name="VAR">BotaoSelecinonaComecaPara</field>
+                                    <field name="PROPERTY">int</field>
+                                    <value name="VALUE">
+                                      <block type="inout_highlow">
+                                        <field name="BOOL">HIGH</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_declare">
+                                        <mutation divisor_input="false"></mutation>
+                                        <field name="VAR">Sim</field>
+                                        <field name="PROPERTY">int</field>
+                                        <value name="VALUE">
+                                          <block type="math_number">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="variables_declare">
+                                            <mutation divisor_input="false"></mutation>
+                                            <field name="VAR">Nao</field>
+                                            <field name="PROPERTY">int</field>
+                                            <value name="VALUE">
+                                              <block type="math_number">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="variables_declare">
+                                                <mutation divisor_input="false"></mutation>
+                                                <field name="VAR">EstouContando</field>
+                                                <field name="PROPERTY">int</field>
+                                                <value name="VALUE">
+                                                  <block type="variables_get">
+                                                    <field name="VAR">Nao</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="variables_declare">
+                                                    <mutation divisor_input="false"></mutation>
+                                                    <field name="VAR">Intervalo</field>
+                                                    <field name="PROPERTY">int</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number">
+                                                        <field name="NUM">30</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_declare">
+                                                        <mutation divisor_input="false"></mutation>
+                                                        <field name="VAR">AUXTempoJogo</field>
+                                                        <field name="PROPERTY">int</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_number">
+                                                            <field name="NUM">0</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="variables_declare">
+                                                            <mutation divisor_input="false"></mutation>
+                                                            <field name="VAR">ContarTempo</field>
+                                                            <field name="PROPERTY">int</field>
+                                                            <value name="VALUE">
+                                                              <block type="math_number">
+                                                                <field name="NUM">1</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="MyLoop">
+      <block type="neo_fill">
+        <field name="NeoInstance">pixels</field>
+        <field name="Couleur">#3366ff</field>
+        <field name="TheChoice">TRUE</field>
+        <value name="First">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Count">
+          <block type="math_number">
+            <field name="NUM">7</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set">
+            <field name="VAR">BotaoMudaJogo</field>
+            <value name="VALUE">
+              <block type="inout_digital_read">
+                <field name="PIN">4</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="variables_get">
+                        <field name="VAR">BotaoMudaJogo</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="inout_highlow">
+                        <field name="BOOL">LOW</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="serial_print">
+                    <value name="CONTENT">
+                      <block type="text">
+                        <field name="TEXT">pressionado</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="procedures_callnoreturn">
+                        <mutation name="VerificaModoJogo"></mutation>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="variables_set">
+                    <field name="VAR">TempoApertado</field>
+                    <value name="VALUE">
+                      <block type="math_number">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get">
+                            <field name="VAR">ModoJogo</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get">
+                            <field name="VAR">EmJogo</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="serial_print">
+                        <value name="CONTENT">
+                          <block type="text">
+                            <field name="TEXT">Modo: Em Jogo</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="procedures_callnoreturn">
+                            <mutation name="StartStop"></mutation>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="serial_print">
+                        <value name="CONTENT">
+                          <block type="text">
+                            <field name="TEXT">Modo: Em Configuração</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="procedures_callnoreturn">
+                            <mutation name="DefineTempodeJogo"></mutation>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if">
+                        <value name="IF0">
+                          <block type="logic_operation">
+                            <field name="OP">AND</field>
+                            <value name="A">
+                              <block type="logic_compare">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="variables_get">
+                                    <field name="VAR">ModoJogo</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get">
+                                    <field name="VAR">EmJogo</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="logic_compare">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="variables_get">
+                                    <field name="VAR">EstouContando</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get">
+                                    <field name="VAR">Sim</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="procedures_callnoreturn">
+                            <mutation name="MarcandoOTempo"></mutation>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="base_delayms">
+                            <value name="DELAY_TIME">
+                              <block type="math_number">
+                                <field name="NUM">1000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="637" y="113">
+    <field name="NAME">VerificaModoJogo</field>
+    <statement name="STACK">
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="logic_compare">
+            <field name="OP">LT</field>
+            <value name="A">
+              <block type="math_arithmetic">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">TempoApertado</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number">
+                    <field name="NUM">3000</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="millis">
+                <field name="unit">ms</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">ModoJogo</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="variables_get">
+                    <field name="VAR">EmJogo</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set">
+                <field name="VAR">ModoJogo</field>
+                <value name="VALUE">
+                  <block type="variables_get">
+                    <field name="VAR">EmConfiguracao</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="variables_set">
+                <field name="VAR">ModoJogo</field>
+                <value name="VALUE">
+                  <block type="variables_get">
+                    <field name="VAR">EmJogo</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="variables_set">
+                <field name="VAR">TempoApertado</field>
+                <value name="VALUE">
+                  <block type="millis">
+                    <field name="unit">ms</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="base_delayms">
+                    <value name="DELAY_TIME">
+                      <block type="math_number">
+                        <field name="NUM">1000</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="687" y="438">
+    <field name="NAME">StartStop</field>
+    <statement name="STACK">
+      <block type="variables_set">
+        <field name="VAR">BotaoSelecinonaComecaPara</field>
+        <value name="VALUE">
+          <block type="inout_digital_read">
+            <field name="PIN">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">BotaoSelecinonaComecaPara</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="inout_highlow">
+                    <field name="BOOL">LOW</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_if">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="variables_get">
+                        <field name="VAR">EstouContando</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get">
+                        <field name="VAR">Nao</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set">
+                    <field name="VAR">EstouContando</field>
+                    <value name="VALUE">
+                      <block type="variables_get">
+                        <field name="VAR">Sim</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_print">
+                        <value name="CONTENT">
+                          <block type="text">
+                            <field name="TEXT">Contar</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="variables_set">
+                    <field name="VAR">EstouContando</field>
+                    <value name="VALUE">
+                      <block type="variables_get">
+                        <field name="VAR">Nao</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_print">
+                        <value name="CONTENT">
+                          <block type="text">
+                            <field name="TEXT">Parar</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="variables_set">
+                    <field name="VAR">ContarTempo</field>
+                    <value name="VALUE">
+                      <block type="variables_get">
+                        <field name="VAR">TempDeJogo</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="base_delayms">
+                        <value name="DELAY_TIME">
+                          <block type="math_number">
+                            <field name="NUM">1000</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="813" y="838">
+    <field name="NAME">DefineTempodeJogo</field>
+    <statement name="STACK">
+      <block type="variables_set">
+        <field name="VAR">BotaoSelecinonaComecaPara</field>
+        <value name="VALUE">
+          <block type="inout_digital_read">
+            <field name="PIN">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">BotaoSelecinonaComecaPara</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="inout_highlow">
+                    <field name="BOOL">LOW</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set">
+                <field name="VAR">AUXTempoJogo</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic">
+                    <field name="OP">ADD</field>
+                    <value name="A">
+                      <block type="variables_get">
+                        <field name="VAR">AUXTempoJogo</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if">
+                    <value name="IF0">
+                      <block type="logic_compare">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="variables_get">
+                            <field name="VAR">AUXTempoJogo</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number">
+                            <field name="NUM">4</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set">
+                        <field name="VAR">AUXTempoJogo</field>
+                        <value name="VALUE">
+                          <block type="math_number">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="variables_set">
+                        <field name="VAR">TempDeJogo</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic">
+                            <field name="OP">MULTIPLY</field>
+                            <value name="A">
+                              <block type="variables_get">
+                                <field name="VAR">AUXTempoJogo</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get">
+                                <field name="VAR">Intervalo</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="serial_printL">
+                            <value name="CONTENT">
+                              <block type="text">
+                                <field name="TEXT">Tempo de Jogo </field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="serial_print">
+                                <value name="CONTENT">
+                                  <block type="variables_get">
+                                    <field name="VAR">TempDeJogo</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="base_delayms">
+                                    <value name="DELAY_TIME">
+                                      <block type="math_number">
+                                        <field name="NUM">1000</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="662" y="1238">
+    <field name="NAME">MarcandoOTempo</field>
+    <statement name="STACK">
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="logic_compare">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get">
+                <field name="VAR">ContarTempo</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="serial_printL">
+            <value name="CONTENT">
+              <block type="text">
+                <field name="TEXT">PERDEU!</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set">
+                <field name="VAR">EstouContando</field>
+                <value name="VALUE">
+                  <block type="variables_get">
+                    <field name="VAR">Nao</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="variables_set">
+            <field name="VAR">ContarTempo</field>
+            <value name="VALUE">
+              <block type="math_arithmetic">
+                <field name="OP">MINUS</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">ContarTempo</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="serial_printL">
+                <value name="CONTENT">
+                  <block type="variables_get">
+                    <field name="VAR">ContarTempo</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -9,7 +9,7 @@ Adafruit_NeoPixel pixels(12, 5, NEO_GRB + NEO_KHZ800);
 int  EmJogo;
 int  EmConfiguracao;
 int  ModoJogo;
-int  TempDeJogo;
+int  TempoDeJogo;
 int  BotaoMudaJogo;
 int  TempoApertado;
 int  BotaoSelecinonaComecaPara;
@@ -19,6 +19,7 @@ int  EstouContando;
 int  Intervalo;
 int  AUXTempoJogo;
 int  ContarTempo;
+int  MostrarNLed;
 void VerificaModoJogo() {
   if (TempoApertado + 3000 < (millis())) {
     if (ModoJogo == EmJogo) {
@@ -46,7 +47,7 @@ void StartStop() {
       Serial.println("Parar");
 
     }
-    ContarTempo = TempDeJogo;
+    ContarTempo = TempoDeJogo;
     delay(1000);
 
   }
@@ -60,9 +61,9 @@ void DefineTempodeJogo() {
       AUXTempoJogo = 1;
 
     }
-    TempDeJogo = AUXTempoJogo * Intervalo;
+    TempoDeJogo = AUXTempoJogo * Intervalo;
     Serial.print("Tempo de Jogo ");
-    Serial.println(TempDeJogo);
+    Serial.println(TempoDeJogo);
     delay(1000);
 
   }
@@ -72,10 +73,26 @@ void MarcandoOTempo() {
   if (ContarTempo == 0) {
     Serial.print("PERDEU!");
     EstouContando = Nao;
+    for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
+       for(int i=0; i<pixels.numPixels(); i++) {
+       int pixelHue = firstPixelHue + (i * 65536L / pixels.numPixels());
+       pixels.setPixelColor(i, pixels.gamma32(pixels.ColorHSV(pixelHue)));
+    }
+    pixels.show();
+    delay(10);
+    }
 
   }
   ContarTempo = ContarTempo - 1;
+  Serial.println("------");
   Serial.print(ContarTempo);
+  Serial.print(" - Mapeia ");
+  MostrarNLed = map(ContarTempo, 0, TempoDeJogo-1, 0, 8);
+  Serial.println(MostrarNLed);
+  Serial.println("");
+  pixels.clear();
+  pixels.fill(pixels.Color(51,102,255),0,MostrarNLed);
+  pixels.show();
 }
 
 void setup()
@@ -84,7 +101,7 @@ void setup()
 EmJogo = 1;
 EmConfiguracao = 2;
 ModoJogo = EmJogo;
-TempDeJogo = 30;
+TempoDeJogo = 30;
 BotaoMudaJogo = HIGH;
 TempoApertado = 0;
 BotaoSelecinonaComecaPara = HIGH;
@@ -94,18 +111,18 @@ EstouContando = Nao;
 Intervalo = 30;
 AUXTempoJogo = 0;
 ContarTempo = 1;
-pinMode(4, INPUT_PULLUP);
+MostrarNLed = 0;
+pinMode(4, INPUT);
 Serial.begin(9600);
+  pixels.setBrightness(25);
 
-pinMode(0, INPUT_PULLUP);
+pinMode(0, INPUT);
 }
 
 
 void loop()
 {
 
-    pixels.fill(pixels.Color(51,102,255),0,7);
-    pixels.show();
     BotaoMudaJogo = digitalRead(4);
     if (BotaoMudaJogo == LOW) {
       Serial.println("pressionado");

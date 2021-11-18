@@ -20,6 +20,8 @@ int  Intervalo;
 int  AUXTempoJogo;
 int  ContarTempo;
 int  MostrarNLed;
+int  Futuro;
+int  TempoAgora;
 void VerificaModoJogo() {
   if (TempoApertado + 3000 < (millis())) {
     if (ModoJogo == EmJogo) {
@@ -30,7 +32,6 @@ void VerificaModoJogo() {
 
     }
     TempoApertado = (millis());
-    delay(1000);
 
   }
 }
@@ -48,7 +49,6 @@ void StartStop() {
 
     }
     ContarTempo = TempoDeJogo;
-    delay(1000);
 
   }
 }
@@ -64,7 +64,6 @@ void DefineTempodeJogo() {
     TempoDeJogo = AUXTempoJogo * Intervalo;
     Serial.print("Tempo de Jogo ");
     Serial.println(TempoDeJogo);
-    delay(1000);
 
   }
 }
@@ -83,7 +82,6 @@ void MarcandoOTempo() {
     }
 
   }
-  ContarTempo = ContarTempo - 1;
   Serial.println("------");
   Serial.print(ContarTempo);
   Serial.print(" - Mapeia ");
@@ -91,8 +89,15 @@ void MarcandoOTempo() {
   Serial.println(MostrarNLed);
   Serial.println("");
   pixels.clear();
-  pixels.fill(pixels.Color(51,102,255),0,MostrarNLed);
-  pixels.show();
+  if (MostrarNLed != 0) {
+    pixels.fill(pixels.Color(51,102,255),0,MostrarNLed);
+    pixels.show();
+
+  } else {
+    pixels.fill(pixels.Color(0,0,0),0,7);
+    pixels.show();
+
+  }
 }
 
 void setup()
@@ -112,6 +117,8 @@ Intervalo = 30;
 AUXTempoJogo = 0;
 ContarTempo = 1;
 MostrarNLed = 0;
+Futuro = 0;
+TempoAgora = (millis());
 pinMode(4, INPUT);
 Serial.begin(9600);
   pixels.setBrightness(25);
@@ -145,6 +152,15 @@ void loop()
       MarcandoOTempo();
 
     }
-    delay(1000);
+    TempoAgora = (millis());
+    if (TempoAgora > Futuro) {
+      Serial.print("Passou 1 segundo");
+      Futuro = TempoAgora + 1000;
+      if (EstouContando == Sim) {
+        ContarTempo = ContarTempo - 1;
+
+      }
+
+    }
 
 }

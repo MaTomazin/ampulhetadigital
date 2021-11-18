@@ -159,6 +159,30 @@
                                                                         <field name="NUM">0</field>
                                                                       </block>
                                                                     </value>
+                                                                    <next>
+                                                                      <block type="variables_declare">
+                                                                        <mutation divisor_input="false"></mutation>
+                                                                        <field name="VAR">Futuro</field>
+                                                                        <field name="PROPERTY">int</field>
+                                                                        <value name="VALUE">
+                                                                          <block type="math_number">
+                                                                            <field name="NUM">0</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="variables_declare">
+                                                                            <mutation divisor_input="false"></mutation>
+                                                                            <field name="VAR">TempoAgora</field>
+                                                                            <field name="PROPERTY">int</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="millis">
+                                                                                <field name="unit">ms</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
                                                                   </block>
                                                                 </next>
                                                               </block>
@@ -330,12 +354,100 @@
                       </block>
                     </statement>
                     <next>
-                      <block type="base_delayms">
-                        <value name="DELAY_TIME">
-                          <block type="math_number">
-                            <field name="NUM">1000</field>
+                      <block type="variables_set">
+                        <field name="VAR">TempoAgora</field>
+                        <value name="VALUE">
+                          <block type="millis">
+                            <field name="unit">ms</field>
                           </block>
                         </value>
+                        <next>
+                          <block type="controls_if">
+                            <value name="IF0">
+                              <block type="logic_compare">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="variables_get">
+                                    <field name="VAR">TempoAgora</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get">
+                                    <field name="VAR">Futuro</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="serial_printL">
+                                <value name="CONTENT">
+                                  <block type="text">
+                                    <field name="TEXT">Passou 1 segundo</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set">
+                                    <field name="VAR">Futuro</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <block type="variables_get">
+                                            <field name="VAR">TempoAgora</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number">
+                                            <field name="NUM">1000</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="controls_if">
+                                        <value name="IF0">
+                                          <block type="logic_compare">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="variables_get">
+                                                <field name="VAR">EstouContando</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="variables_get">
+                                                <field name="VAR">Sim</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="variables_set">
+                                            <field name="VAR">ContarTempo</field>
+                                            <value name="VALUE">
+                                              <block type="math_arithmetic">
+                                                <field name="OP">MINUS</field>
+                                                <value name="A">
+                                                  <block type="variables_get">
+                                                    <field name="VAR">ContarTempo</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
                       </block>
                     </next>
                   </block>
@@ -422,15 +534,6 @@
                     <field name="unit">ms</field>
                   </block>
                 </value>
-                <next>
-                  <block type="base_delayms">
-                    <value name="DELAY_TIME">
-                      <block type="math_number">
-                        <field name="NUM">1000</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
               </block>
             </next>
           </block>
@@ -529,15 +632,6 @@
                         <field name="VAR">TempoDeJogo</field>
                       </block>
                     </value>
-                    <next>
-                      <block type="base_delayms">
-                        <value name="DELAY_TIME">
-                          <block type="math_number">
-                            <field name="NUM">1000</field>
-                          </block>
-                        </value>
-                      </block>
-                    </next>
                   </block>
                 </next>
               </block>
@@ -547,7 +641,7 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="813" y="838">
+  <block type="procedures_defnoreturn" x="813" y="837">
     <field name="NAME">DefineTempodeJogo</field>
     <statement name="STACK">
       <block type="variables_set">
@@ -651,15 +745,6 @@
                                     <field name="VAR">TempoDeJogo</field>
                                   </block>
                                 </value>
-                                <next>
-                                  <block type="base_delayms">
-                                    <value name="DELAY_TIME">
-                                      <block type="math_number">
-                                        <field name="NUM">1000</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </next>
                               </block>
                             </next>
                           </block>
@@ -675,7 +760,7 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="662" y="1238">
+  <block type="procedures_defnoreturn" x="912" y="1237">
     <field name="NAME">MarcandoOTempo</field>
     <statement name="STACK">
       <block type="controls_if">
@@ -724,65 +809,65 @@
           </block>
         </statement>
         <next>
-          <block type="variables_set">
-            <field name="VAR">ContarTempo</field>
-            <value name="VALUE">
-              <block type="math_arithmetic">
-                <field name="OP">MINUS</field>
-                <value name="A">
-                  <block type="variables_get">
-                    <field name="VAR">ContarTempo</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
+          <block type="serial_print">
+            <value name="CONTENT">
+              <block type="text">
+                <field name="TEXT">------</field>
               </block>
             </value>
             <next>
-              <block type="serial_print">
+              <block type="serial_printL">
                 <value name="CONTENT">
-                  <block type="text">
-                    <field name="TEXT">------</field>
+                  <block type="variables_get">
+                    <field name="VAR">ContarTempo</field>
                   </block>
                 </value>
                 <next>
                   <block type="serial_printL">
                     <value name="CONTENT">
-                      <block type="variables_get">
-                        <field name="VAR">ContarTempo</field>
+                      <block type="text">
+                        <field name="TEXT"> - Mapeia </field>
                       </block>
                     </value>
                     <next>
-                      <block type="serial_printL">
-                        <value name="CONTENT">
-                          <block type="text">
-                            <field name="TEXT"> - Mapeia </field>
-                          </block>
-                        </value>
+                      <block type="ard_code">
+                        <field name="myard_code">MostrarNLed = map(ContarTempo, 0, TempoDeJogo-1, 0, 8);</field>
                         <next>
-                          <block type="ard_code">
-                            <field name="myard_code">MostrarNLed = map(ContarTempo, 0, TempoDeJogo-1, 0, 8);</field>
+                          <block type="serial_print">
+                            <value name="CONTENT">
+                              <block type="variables_get">
+                                <field name="VAR">MostrarNLed</field>
+                              </block>
+                            </value>
                             <next>
                               <block type="serial_print">
                                 <value name="CONTENT">
-                                  <block type="variables_get">
-                                    <field name="VAR">MostrarNLed</field>
+                                  <block type="text">
+                                    <field name="TEXT"></field>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="serial_print">
-                                    <value name="CONTENT">
-                                      <block type="text">
-                                        <field name="TEXT"></field>
-                                      </block>
-                                    </value>
+                                  <block type="neo_clear">
+                                    <field name="NeoInstance">pixels</field>
                                     <next>
-                                      <block type="neo_clear">
-                                        <field name="NeoInstance">pixels</field>
-                                        <next>
+                                      <block type="controls_if">
+                                        <mutation else="1"></mutation>
+                                        <value name="IF0">
+                                          <block type="logic_compare">
+                                            <field name="OP">NEQ</field>
+                                            <value name="A">
+                                              <block type="variables_get">
+                                                <field name="VAR">MostrarNLed</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number">
+                                                <field name="NUM">0</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
                                           <block type="neo_fill">
                                             <field name="NeoInstance">pixels</field>
                                             <field name="Couleur">#3366ff</field>
@@ -798,7 +883,24 @@
                                               </block>
                                             </value>
                                           </block>
-                                        </next>
+                                        </statement>
+                                        <statement name="ELSE">
+                                          <block type="neo_fill">
+                                            <field name="NeoInstance">pixels</field>
+                                            <field name="Couleur">#000000</field>
+                                            <field name="TheChoice">TRUE</field>
+                                            <value name="First">
+                                              <block type="math_number">
+                                                <field name="NUM">0</field>
+                                              </block>
+                                            </value>
+                                            <value name="Count">
+                                              <block type="math_number">
+                                                <field name="NUM">7</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
                                       </block>
                                     </next>
                                   </block>
